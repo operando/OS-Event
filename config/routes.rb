@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   match '/event/(:event_site)', to: 'os_event#event', via: 'get'
 
+  match '/week/(:event_site)', to: 'os_event#week', via: 'get'
+
+  match '/today/(:event_site)', to: 'os_event#today', via: 'get'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
