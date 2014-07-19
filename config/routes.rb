@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   match '/today/(:event_site)', to: 'os_event#today', via: 'get'
 
+  match '/history', to: 'os_event#history', via: 'get'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
