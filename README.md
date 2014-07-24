@@ -41,3 +41,5 @@
 * Cache
 
 * Doorkeeper
+
+* メンテナンス時の対応
