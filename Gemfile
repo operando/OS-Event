@@ -11,6 +11,8 @@ group :development, :test do
   gem 'spork-rails', '4.0.0'
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.5.3'
+  gem 'timecop', '0.7.1'
+  gem 'webmock', '1.18.0'
 end
 
 group :test do
