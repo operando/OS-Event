@@ -11,13 +11,13 @@ class OsEventController < ApplicationController
     event_array = Array.new
     time_now = Time.now
 
-    if event_site == "connpass" or event_site == nil then
+    if event_site == "connpass" or event_site == nil
       connpass_json_str = open("http://connpass.com/api/v1/event/?nickname=operandoOS", :allow_redirections => :all).read
 
       connpass_event_mash = Hashie::Mash.new(JSON.parse(connpass_json_str))
 
-      connpass_event_mash.events.each { |e|
-        if time_now < e.started_at then
+      connpass_event_mash.events.each do |e|
+        if time_now < e.started_at
           connpass_event = Event.new
 
           connpass_event.title = e.title
@@ -30,14 +30,14 @@ class OsEventController < ApplicationController
 
           event_array.push(connpass_event)
         end
-      }
+      end
     end
 
-    if event_site == "zusaar" or event_site == nil then
+    if event_site == "zusaar" or event_site == nil
       zusaar_mash = Hashie::Mash.new(JSON.parse(open("http://www.zusaar.com/api/event/?user_id=agxzfnp1c2Fhci1ocmRyFgsSBFVzZXIiDDMzMzk4OTM5MV90dww", :allow_redirections => :all).read))
 
-      zusaar_mash.event.each { |e|
-        if time_now < e.started_at then
+      zusaar_mash.event.each do |e|
+        if time_now < e.started_at
           zusaar_event = Event.new
 
           zusaar_event.title = e.title
@@ -50,14 +50,14 @@ class OsEventController < ApplicationController
 
           event_array.push(zusaar_event)
         end
-      }
+      end
     end
 
-    if event_site == "atnd" or event_site == nil then
+    if event_site == "atnd" or event_site == nil
       atnd_mash = Hashie::Mash.new(JSON.parse(open("http://api.atnd.org/events/?nickname=operando&format=json", :allow_redirections => :all).read))
 
-      atnd_mash.events.each { |e|
-        if time_now < e.event.started_at then
+      atnd_mash.events.each do |e|
+        if time_now < e.event.started_at
           atnd_event = Event.new
 
           atnd_event.title = e.event.title
@@ -70,10 +70,10 @@ class OsEventController < ApplicationController
 
           event_array.push(atnd_event)
         end
-      }
+      end
     end
 
-    #event_array.sort!{|a,b| a.start_time <=> b.start_time }
+    #event_array.sort! { |a, b| a.start_time <=> b.start_time }
 
     #  File.open(Rails.root.join('tmp','event_cache.json'),'w') { |file| file.write event_array.to_json } if event_site == nil 
 
@@ -85,20 +85,20 @@ class OsEventController < ApplicationController
 
     time_now = Time.now
 
-    if File.exist?(Rails.root.join('tmp','event_simple_cache.json')) and event_site == nil then
+    if File.exist?(Rails.root.join('tmp','event_simple_cache.json')) and event_site == nil
       # p time_now - File.stat(Rails.root.join('tmp','event_simple_cache.json')).mtime
       event_simple_cache = File.read(Rails.root.join('tmp','event_simple_cache.json'),:encoding => Encoding::UTF_8)  
       render :json => event_simple_cache
     else
       event_array = Array.new
 
-      if event_site == "connpass" or event_site == nil then
+      if event_site == "connpass" or event_site == nil
         connpass_json_str = open("http://connpass.com/api/v1/event/?nickname=operandoOS", :allow_redirections => :all).read
 
         connpass_event_mash = Hashie::Mash.new(JSON.parse(connpass_json_str))
 
-        connpass_event_mash.events.each { |e|
-          if time_now < e.started_at then
+        connpass_event_mash.events.each do |e|
+          if time_now < e.started_at
             connpass_event = Event.new
 
             connpass_event.title = e.title
@@ -110,14 +110,14 @@ class OsEventController < ApplicationController
 
             event_array.push(connpass_event)
           end
-        }
+        end
       end
 
-      if event_site == "zusaar" or event_site == nil then
+      if event_site == "zusaar" or event_site == nil
         zusaar_mash = Hashie::Mash.new(JSON.parse(open("http://www.zusaar.com/api/event/?user_id=agxzfnp1c2Fhci1ocmRyFgsSBFVzZXIiDDMzMzk4OTM5MV90dww", :allow_redirections => :all).read))
 
-        zusaar_mash.event.each { |e|
-          if time_now < e.started_at then
+        zusaar_mash.event.each do |e|
+          if time_now < e.started_at
             zusaar_event = Event.new
 
             zusaar_event.title = e.title
@@ -129,14 +129,14 @@ class OsEventController < ApplicationController
 
             event_array.push(zusaar_event)
           end
-        }
+        end
       end
 
-      if event_site == "atnd" or event_site == nil then
+      if event_site == "atnd" or event_site == nil
         atnd_mash = Hashie::Mash.new(JSON.parse(open("http://api.atnd.org/events/?nickname=operando&format=json", :allow_redirections => :all).read))
 
-        atnd_mash.events.each { |e|
-          if time_now < e.event.started_at then
+        atnd_mash.events.each do |e|
+          if time_now < e.event.started_at
             atnd_event = Event.new
 
             atnd_event.title = e.event.title
@@ -148,10 +148,10 @@ class OsEventController < ApplicationController
 
             event_array.push(atnd_event)
           end
-        }
+        end
       end
 
-      event_array.sort!{|a,b| a.start_time <=> b.start_time }
+      event_array.sort! { |a, b| a.start_time <=> b.start_time }
       # File.open(Rails.root.join('tmp','event_simple_cache.json'),'w') { |file| file.write event_array.to_json } if event_site == nil 
 
       render :json => event_array
@@ -164,13 +164,13 @@ class OsEventController < ApplicationController
     event_array = Array.new
     time_now = Time.now
 
-    if event_site == "connpass" or event_site == nil then
+    if event_site == "connpass" or event_site == nil
       connpass_json_str = open("http://connpass.com/api/v1/event/?nickname=operandoOS", :allow_redirections => :all).read
 
       connpass_event_mash = Hashie::Mash.new(JSON.parse(connpass_json_str))
 
-      connpass_event_mash.events.each { |e|
-        if time_now < e.started_at and time_now.end_of_week > e.started_at then
+      connpass_event_mash.events.each do |e|
+        if time_now < e.started_at and time_now.end_of_week > e.started_at
           connpass_event = Event.new
 
           connpass_event.title = e.title
@@ -183,14 +183,14 @@ class OsEventController < ApplicationController
 
           event_array.push(connpass_event)
         end
-      }
+      end
     end
 
-    if event_site == "zusaar" or event_site == nil then
+    if event_site == "zusaar" or event_site == nil
       zusaar_mash = Hashie::Mash.new(JSON.parse(open("http://www.zusaar.com/api/event/?user_id=agxzfnp1c2Fhci1ocmRyFgsSBFVzZXIiDDMzMzk4OTM5MV90dww", :allow_redirections => :all).read))
 
-      zusaar_mash.event.each { |e|
-        if time_now < e.started_at and time_now.end_of_week > e.started_at then
+      zusaar_mash.event.each do |e|
+        if time_now < e.started_at and time_now.end_of_week > e.started_at
           zusaar_event = Event.new
 
           zusaar_event.title = e.title
@@ -203,14 +203,14 @@ class OsEventController < ApplicationController
 
           event_array.push(zusaar_event)
         end
-      }
+      end
     end
 
-    if event_site == "atnd" or event_site == nil then
+    if event_site == "atnd" or event_site == nil
       atnd_mash = Hashie::Mash.new(JSON.parse(open("http://api.atnd.org/events/?nickname=operando&format=json", :allow_redirections => :all).read))
 
-      atnd_mash.events.each { |e|
-        if time_now < e.event.started_at and time_now.end_of_week > e.event.started_at then
+      atnd_mash.events.each do |e|
+        if time_now < e.event.started_at and time_now.end_of_week > e.event.started_at
           atnd_event = Event.new
 
           atnd_event.title = e.event.title
@@ -223,10 +223,10 @@ class OsEventController < ApplicationController
 
           event_array.push(atnd_event)
         end
-      }
+      end
     end
 
-    event_array.sort!{|a,b| a.start_time <=> b.start_time }
+    event_array.sort! { |a, b| a.start_time <=> b.start_time }
     render :json => event_array
   end
 
@@ -238,12 +238,12 @@ class OsEventController < ApplicationController
     # test Date
     # time_now = Time.new(2014,7,16).strftime("%Y%m%d")
 
-    if event_site == "connpass" or event_site == nil then
+    if event_site == "connpass" or event_site == nil
       connpass_json_str = open("http://connpass.com/api/v1/event/?nickname=operandoOS&ymd=#{time_now}", :allow_redirections => :all).read
 
       connpass_event_mash = Hashie::Mash.new(JSON.parse(connpass_json_str))
 
-      connpass_event_mash.events.each { |e|
+      connpass_event_mash.events.each do |e|
         connpass_event = Event.new
 
         connpass_event.title = e.title
@@ -255,13 +255,13 @@ class OsEventController < ApplicationController
         connpass_event.event_site = "connpass"
 
         event_array.push(connpass_event)
-      }
+      end
     end
 
-    if event_site == "zusaar" or event_site == nil then
+    if event_site == "zusaar" or event_site == nil
       zusaar_mash = Hashie::Mash.new(JSON.parse(open("http://www.zusaar.com/api/event/?user_id=agxzfnp1c2Fhci1ocmRyFgsSBFVzZXIiDDMzMzk4OTM5MV90dww&ymd=#{time_now}", :allow_redirections => :all).read))
 
-      zusaar_mash.event.each { |e|
+      zusaar_mash.event.each do |e|
         zusaar_event = Event.new
 
         zusaar_event.title = e.title
@@ -273,13 +273,13 @@ class OsEventController < ApplicationController
         zusaar_event.event_site = "zusaar"
 
         event_array.push(zusaar_event)
-      }
+      end
     end
 
-    if event_site == "atnd" or event_site == nil then
+    if event_site == "atnd" or event_site == nil
       atnd_mash = Hashie::Mash.new(JSON.parse(open("http://api.atnd.org/events/?nickname=operando&format=json&ymd=#{time_now}", :allow_redirections => :all).read))
 
-      atnd_mash.events.each { |e|
+      atnd_mash.events.each do |e|
         atnd_event = Event.new
 
         atnd_event.title = e.event.title
@@ -291,10 +291,10 @@ class OsEventController < ApplicationController
         atnd_event.event_site = "atnd"
 
         event_array.push(atnd_event)
-      }
+      end
     end
 
-    event_array.sort!{|a,b| a.start_time <=> b.start_time }
+    event_array.sort! { |a, b| a.start_time <=> b.start_time }
     render :json => event_array
   end
 
@@ -307,8 +307,8 @@ class OsEventController < ApplicationController
 
     connpass_event_mash = Hashie::Mash.new(JSON.parse(connpass_json_str))
 
-    connpass_event_mash.events.each { |e|
-      if time_now > e.started_at then
+    connpass_event_mash.events.each do |e|
+      if time_now > e.started_at
         connpass_event = Event.new
 
         connpass_event.title = e.title
@@ -321,12 +321,12 @@ class OsEventController < ApplicationController
 
         event_array.push(connpass_event)
       end
-    }
+    end
 
     zusaar_mash = Hashie::Mash.new(JSON.parse(open("http://www.zusaar.com/api/event/?user_id=agxzfnp1c2Fhci1ocmRyFgsSBFVzZXIiDDMzMzk4OTM5MV90dww", :allow_redirections => :all).read))
 
-    zusaar_mash.event.each { |e|
-      if time_now > e.started_at then
+    zusaar_mash.event.each do |e|
+      if time_now > e.started_at
         zusaar_event = Event.new
 
         zusaar_event.title = e.title
@@ -339,12 +339,12 @@ class OsEventController < ApplicationController
 
         event_array.push(zusaar_event)
       end
-    }
+    end
 
     atnd_mash = Hashie::Mash.new(JSON.parse(open("http://api.atnd.org/events/?nickname=operando&format=json", :allow_redirections => :all).read))
 
-    atnd_mash.events.each { |e|
-      if time_now > e.event.started_at then
+    atnd_mash.events.each do |e|
+      if time_now > e.event.started_at
         atnd_event = Event.new
 
         atnd_event.title = e.event.title
@@ -357,9 +357,9 @@ class OsEventController < ApplicationController
 
         event_array.push(atnd_event)
       end
-    }
+    end
 
-    event_array.sort!{|a,b| b.start_time <=> a.start_time }
+    event_array.sort! { |a, b| b.start_time <=> a.start_time }
 
     render :json => event_array
   end
