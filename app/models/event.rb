@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
 
   def self.connpass_event_mash
-    connpass_event_mash = Hashie::Mash.new(JSON.parse(open("http://connpass.com/api/v1/event/?nickname=operandoOS", :allow_redirections => :all).read))
+    Hashie::Mash.new(JSON.parse(open("http://connpass.com/api/v1/event/?nickname=operandoOS", :allow_redirections => :all).read))
   end
 
   def self.build_connpass_event event_data
