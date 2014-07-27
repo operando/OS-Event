@@ -12,12 +12,12 @@ group :development, :test do
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.5.3'
   gem 'timecop', '0.7.1'
-  gem 'webmock', '1.18.0'
 end
 
 group :test do
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'
+  gem 'webmock', '1.18.0'
 end
 
 group :production do
