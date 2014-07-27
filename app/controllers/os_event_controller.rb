@@ -12,25 +12,8 @@ class OsEventController < ApplicationController
     time_now = Time.now
 
     if event_site == "connpass" or event_site == nil
-      connpass_json_str = open("http://connpass.com/api/v1/event/?nickname=operandoOS", :allow_redirections => :all).read
-
-      connpass_event_mash = Hashie::Mash.new(JSON.parse(connpass_json_str))
-
-      connpass_event_mash.events.each do |e|
-        if time_now < e.started_at
-          connpass_event = Event.new
-
-          connpass_event.title = e.title
-          connpass_event.url = e.event_url
-          connpass_event.address = e.address
-          connpass_event.description = e.description
-          connpass_event.start_time = e.started_at
-          connpass_event.end_time = e.ended_at
-          connpass_event.event_site = "connpass"
-
-          event_array.push(connpass_event)
-        end
-      end
+      connpass_event_mash = Event.connpass_event_mash
+      connpass_event_mash.events.each { |e| event_array.push(Event.build_connpass_event(e)) if time_now < e.started_at }
     end
 
     if event_site == "zusaar" or event_site == nil
@@ -93,24 +76,8 @@ class OsEventController < ApplicationController
       event_array = Array.new
 
       if event_site == "connpass" or event_site == nil
-        connpass_json_str = open("http://connpass.com/api/v1/event/?nickname=operandoOS", :allow_redirections => :all).read
-
-        connpass_event_mash = Hashie::Mash.new(JSON.parse(connpass_json_str))
-
-        connpass_event_mash.events.each do |e|
-          if time_now < e.started_at
-            connpass_event = Event.new
-
-            connpass_event.title = e.title
-            connpass_event.url = e.event_url
-            connpass_event.address = e.address
-            connpass_event.start_time = e.started_at
-            connpass_event.end_time = e.ended_at
-            connpass_event.event_site = "connpass"
-
-            event_array.push(connpass_event)
-          end
-        end
+        connpass_event_mash = Event.connpass_event_mash
+        connpass_event_mash.events.each { |e| event_array.push(Event.build_connpass_event(e)) if time_now < e.started_at }
       end
 
       if event_site == "zusaar" or event_site == nil
@@ -165,25 +132,8 @@ class OsEventController < ApplicationController
     time_now = Time.now
 
     if event_site == "connpass" or event_site == nil
-      connpass_json_str = open("http://connpass.com/api/v1/event/?nickname=operandoOS", :allow_redirections => :all).read
-
-      connpass_event_mash = Hashie::Mash.new(JSON.parse(connpass_json_str))
-
-      connpass_event_mash.events.each do |e|
-        if time_now < e.started_at and time_now.end_of_week > e.started_at
-          connpass_event = Event.new
-
-          connpass_event.title = e.title
-          connpass_event.url = e.event_url
-          connpass_event.address = e.address
-          connpass_event.description = e.description
-          connpass_event.start_time = e.started_at
-          connpass_event.end_time = e.ended_at
-          connpass_event.event_site = "connpass"
-
-          event_array.push(connpass_event)
-        end
-      end
+      connpass_event_mash = Event.connpass_event_mash
+      connpass_event_mash.events.each { |e| event_array.push(Event.connpass_event_mash(e)) if time_now < e.started_at and time_now.end_of_week > e.started_at }
     end
 
     if event_site == "zusaar" or event_site == nil
@@ -240,22 +190,8 @@ class OsEventController < ApplicationController
 
     if event_site == "connpass" or event_site == nil
       connpass_json_str = open("http://connpass.com/api/v1/event/?nickname=operandoOS&ymd=#{time_now}", :allow_redirections => :all).read
-
       connpass_event_mash = Hashie::Mash.new(JSON.parse(connpass_json_str))
-
-      connpass_event_mash.events.each do |e|
-        connpass_event = Event.new
-
-        connpass_event.title = e.title
-        connpass_event.url = e.event_url
-        connpass_event.address = e.address
-        connpass_event.description = e.description
-        connpass_event.start_time = e.started_at
-        connpass_event.end_time = e.ended_at
-        connpass_event.event_site = "connpass"
-
-        event_array.push(connpass_event)
-      end
+      connpass_event_mash.events.each { |e| event_array.push(Event.build_connpass_event(e)) }
     end
 
     if event_site == "zusaar" or event_site == nil
@@ -303,25 +239,8 @@ class OsEventController < ApplicationController
     event_array = Array.new
     time_now = Time.now
 
-    connpass_json_str = open("http://connpass.com/api/v1/event/?nickname=operandoOS", :allow_redirections => :all).read
-
-    connpass_event_mash = Hashie::Mash.new(JSON.parse(connpass_json_str))
-
-    connpass_event_mash.events.each do |e|
-      if time_now > e.started_at
-        connpass_event = Event.new
-
-        connpass_event.title = e.title
-        connpass_event.url = e.event_url
-        connpass_event.address = e.address
-        connpass_event.description = e.description
-        connpass_event.start_time = e.started_at
-        connpass_event.end_time = e.ended_at
-        connpass_event.event_site = "connpass"
-
-        event_array.push(connpass_event)
-      end
-    end
+    connpass_event_mash = Event.connpass_event_mash
+    connpass_event_mash.events.each { |e| event_array.push(Event.build_connpass_event(e)) if time_now > e.started_at }
 
     zusaar_mash = Hashie::Mash.new(JSON.parse(open("http://www.zusaar.com/api/event/?user_id=agxzfnp1c2Fhci1ocmRyFgsSBFVzZXIiDDMzMzk4OTM5MV90dww", :allow_redirections => :all).read))
 
