@@ -133,7 +133,7 @@ class OsEventController < ApplicationController
 
     if event_site == "connpass" or event_site == nil
       connpass_event_mash = Event.connpass_event_mash
-      connpass_event_mash.events.each { |e| event_array.push(Event.connpass_event_mash(e)) if time_now < e.started_at and time_now.end_of_week > e.started_at }
+      connpass_event_mash.events.each { |e| event_array.push(Event.build_connpass_event(e)) if time_now < e.started_at and time_now.end_of_week > e.started_at }
     end
 
     if event_site == "zusaar" or event_site == nil
