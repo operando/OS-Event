@@ -3,7 +3,7 @@ require 'json'
 require 'hashie/mash'
 require 'open_uri_redirections'
 
-class OsEventController < ApplicationController
+class EventsController < ApplicationController
 
   def event
     event_site = params[:event_site]
