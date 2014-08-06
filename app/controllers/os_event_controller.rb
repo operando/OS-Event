@@ -60,7 +60,7 @@ class OsEventController < ApplicationController
 
     #  File.open(Rails.root.join('tmp','event_cache.json'),'w') { |file| file.write event_array.to_json } if event_site == nil 
 
-    render :json => event_array
+    @events = event_array
   end
 
   def simple
@@ -121,7 +121,7 @@ class OsEventController < ApplicationController
       event_array.sort! { |a, b| a.start_time <=> b.start_time }
       # File.open(Rails.root.join('tmp','event_simple_cache.json'),'w') { |file| file.write event_array.to_json } if event_site == nil 
 
-      render :json => event_array
+      @events = event_array
     end
   end
 
@@ -177,7 +177,7 @@ class OsEventController < ApplicationController
     end
 
     event_array.sort! { |a, b| a.start_time <=> b.start_time }
-    render :json => event_array
+    @events = event_array
   end
 
   def today
@@ -231,7 +231,7 @@ class OsEventController < ApplicationController
     end
 
     event_array.sort! { |a, b| a.start_time <=> b.start_time }
-    render :json => event_array
+    @events = event_array
   end
 
   def history
@@ -280,6 +280,6 @@ class OsEventController < ApplicationController
 
     event_array.sort! { |a, b| b.start_time <=> a.start_time }
 
-    render :json => event_array
+    @events = event_array
   end
 end
