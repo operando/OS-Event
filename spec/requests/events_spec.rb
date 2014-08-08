@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'OsEventController' do
+describe 'EventsController' do
   before do
     Timecop.freeze(Time.local(2014, 7, 24, 12, 0, 0))
   end
