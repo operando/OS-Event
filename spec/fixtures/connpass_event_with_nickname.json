@@ -162,7 +162,7 @@
         "address" : "東京都東京都新宿区西新宿1-5-11 新宿三葉ビル6F",
         "catch" : "",
         "description" : "<h1 style=\"margin-top:0px;margin-bottom:0.75em;font-size:13px;font-weight:normal;color:rgb(51, 51, 51);\">第58回： Google Compute Engine+Docker、BigQuery+Fluentd+Norikraの話</h1><div><strong style=\"color:rgb(51, 51, 51);\">ネタ：</strong></div><h1 style=\"font-size:14px;font-weight:normal;\"><ul><li>Googleのクラウドサービス「Google Cloud Platform(GCP)」について中の人に語っていただきます！<ul><li>GoogleのIaaSサービス「Google Compute Engine(GCE)」とDockerの話</li><li>Googleのビッグデータ解析基盤「BigQuery」とFluentd+Norikraで実現するStream Processingの話</li></ul></li><li>スピーカー<ul><li>Google 佐藤一憲さん <u><a href=\"https://twitter.com/kazunori_279\" rel=\"nofollow\">twitter: @kazunori_279</a></u></li></ul></li></ul><p style=\"margin-bottom:0.75em;color:rgb(51, 51, 51);font-size:13px;\"><br /></p><p style=\"margin-bottom:0.75em;color:rgb(51, 51, 51);font-size:13px;\">※今回はいつもの会場です！※</p><p style=\"margin-bottom:0.75em;color:rgb(51, 51, 51);font-size:13px;\">※随時更新します！</p><p style=\"margin-bottom:0.75em;color:rgb(51, 51, 51);font-size:13px;\"><strong>■概要</strong></p><ul><li>日時: 2014/7/4(金) 19:00～21:30</li><li>会場: ハロー会議室 新宿 C+D (東京都新宿区西新宿1丁目5-11 新宿三葉ビル6F)</li><li>参加費: 1,000円(会場費に充てさせていただきます)<ul><li>今回も学生無料！(受付で学生証を見せてください)</li></ul></li></ul><p style=\"margin-bottom:0.75em;color:rgb(51, 51, 51);font-size:13px;\">※twitterで<a href=\"http://twitter.com/hbstudy\" rel=\"nofollow\">hbstudy</a>をフォローしてください！ <br />　公式ハッシュタグ→ #hbstudy</p><p style=\"margin-bottom:0.75em;color:rgb(51, 51, 51);font-size:13px;\"><strong>■その他</strong></p><ul><li><strong>重要なお知らせ</strong> <br />遅刻した！入り口が閉まっている！という方はtwitterで #hbstudy でヘルプミーしてください！ <br />誰かが迎えにいけるかもしれません。</li></ul></h1><h1 style=\"margin-top:0px;margin-bottom:0.75em;font-size:13px;font-weight:normal;color:rgb(51, 51, 51);\">参加登録</h1><h1 style=\"font-size:14px;font-weight:normal;\"><ul><li><a href=\"http://connpass.com/event/6753/\" rel=\"nofollow\">勉強会はこちら</a></li><li><a href=\"http://connpass.com/event/6754/\" rel=\"nofollow\">懇親会はこちら</a></li></ul></h1><ul>\n</ul>",
-        "ended_at" : "2014-07-04T21:30:00+09:00",
+        "ended_at" : "2014-07-25T21:30:00+09:00",
         "event_id" : 6753,
         "event_type" : "participation",
         "event_url" : "http://connpass.com/event/6753/",
@@ -178,7 +178,7 @@
             "title" : "hbstudy",
             "url" : "http://connpass.com/series/91/"
           },
-        "started_at" : "2014-07-04T19:00:00+09:00",
+        "started_at" : "2014-07-25T19:00:00+09:00",
         "title" : "hbstudy#58",
         "updated_at" : "2014-06-30T10:07:54+09:00",
         "waiting" : 0
