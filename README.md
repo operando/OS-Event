@@ -2,13 +2,13 @@
 
 ## API
 
-* /event/(:event_site)
+* /event
 
-* /simple/(:event_site)
+* /simple
 
-* /week/(:event_site)
+* /week
 
-* /today/(:event_site)
+* /today
 
 * /history
 
