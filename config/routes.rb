@@ -2,13 +2,13 @@ Rails.application.routes.draw do
 
   root 'events#event'
 
-  match '/simple/(:event_site)', to: 'events#simple', via: 'get'
+  match '/simple', to: 'events#simple', via: 'get'
 
-  match '/event/(:event_site)', to: 'events#event', via: 'get'
+  match '/event', to: 'events#event', via: 'get'
 
-  match '/week/(:event_site)', to: 'events#week', via: 'get'
+  match '/week', to: 'events#week', via: 'get'
 
-  match '/today/(:event_site)', to: 'events#today', via: 'get'
+  match '/today', to: 'events#today', via: 'get'
 
   match '/history', to: 'events#history', via: 'get'
 
