@@ -1,8 +1,3 @@
-require 'open-uri'
-require 'json'
-require 'hashie/mash'
-require 'open_uri_redirections'
-
 class EventsController < ApplicationController
 
   def event

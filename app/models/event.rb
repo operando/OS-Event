@@ -1,8 +1,20 @@
 class Event < ActiveRecord::Base
 
+  SERVICES = {
+    connpass: {
+      api_url: 'http://connpass.com/api/v1/event/?nickname=operandoOS'
+    },
+    zusaar: {
+      api_url: 'http://www.zusaar.com/api/event/?user_id=agxzfnp1c2Fhci1ocmRyFgsSBFVzZXIiDDMzMzk4OTM5MV90dww'
+    },
+    atnd: {
+      api_url: 'http://api.atnd.org/events/?nickname=operando&format=json'
+    }
+  }
+
   def self.select query = {}, &block
     [].tap do |ary|
-      Event.connpass_event_mash.events.each do |e|
+      Event.mash(api_url(:connpass, query)).events.each do |e|
         event = Event.build_connpass_event(e)
         if block_given?
           ary.push(event) if yield event
@@ -10,7 +22,7 @@ class Event < ActiveRecord::Base
           ary.push(event)
         end
       end
-      Event.zusaar_event_mash.event.each do |e|
+      Event.mash(api_url(:zusaar, query)).event.each do |e|
         event = Event.build_zusaar_event(e)
         if block_given?
           ary.push(event) if yield event
@@ -18,7 +30,7 @@ class Event < ActiveRecord::Base
           ary.push(event)
         end
       end
-      Event.atnd_event_mash.events.each do |e|
+      Event.mash(api_url(:atnd, query)).events.each do |e|
         event = Event.build_atnd_event(e)
         if block_given?
           ary.push(event) if yield event
@@ -29,8 +41,14 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.connpass_event_mash(query = {})
-    Hashie::Mash.new(JSON.parse(open(connpass_url(query), :allow_redirections => :all).read))
+  def self.mash url
+    Hashie::Mash.new(JSON.parse(open(url, :allow_redirections => :all).read))
+  end
+
+  def self.api_url name, query = {}
+    SERVICES[name.to_sym][:api_url].dup.tap do |url|
+      url << "&#{query.to_query}" unless query.empty?
+    end
   end
 
   def self.build_connpass_event event_data
@@ -44,10 +62,6 @@ class Event < ActiveRecord::Base
       event_site:  "connpass")
   end
 
-  def self.zusaar_event_mash(query = {})
-    Hashie::Mash.new(JSON.parse(open(zusaar_url(query), :allow_redirections => :all).read))
-  end
-
   def self.build_zusaar_event event_data
     self.new(
       title:       event_data.title,
@@ -59,10 +73,6 @@ class Event < ActiveRecord::Base
       event_site:  'zusaar')
   end
 
-  def self.atnd_event_mash(query = {})
-    Hashie::Mash.new(JSON.parse(open(atnd_url(query), :allow_redirections => :all).read))
-  end
-
   def self.build_atnd_event event_data
     self.new(
       title:       event_data.event.title,
@@ -72,23 +82,5 @@ class Event < ActiveRecord::Base
       start_time:  event_data.event.started_at,
       end_time:    event_data.event.ended_at,
       event_site:  'atnd')
-  end
-
-  def self.connpass_url(query = {})
-    'http://connpass.com/api/v1/event/?nickname=operandoOS'.tap do |url|
-      url << "&#{query.to_query}" unless query.empty?
-    end
-  end
-
-  def self.zusaar_url(query = {})
-    'http://www.zusaar.com/api/event/?user_id=agxzfnp1c2Fhci1ocmRyFgsSBFVzZXIiDDMzMzk4OTM5MV90dww'.tap do |url|
-      url << "&#{query.to_query}" unless query.empty?
-    end
-  end
-
-  def self.atnd_url(query = {})
-    'http://api.atnd.org/events/?nickname=operando&format=json'.tap do |url|
-      url << "&#{query.to_query}" unless query.empty?
-    end
   end
 end
