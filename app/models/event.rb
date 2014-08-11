@@ -5,6 +5,6 @@ class Event < ActiveRecord::Base
   end
 
   def self.build_connpass_event event_data
-    self.new(title: event_data.title, url: event_data.url, address: event_data.address, description: event_data.description, start_time: event_data.started_at, end_time: event_data.ended_at, event_site: "connpass")
+    self.new(title: event_data.title, url: event_data.event_url, address: event_data.address, description: event_data.description, start_time: event_data.started_at, end_time: event_data.ended_at, event_site: "connpass")
   end
 end
