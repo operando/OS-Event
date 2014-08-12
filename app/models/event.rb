@@ -54,7 +54,7 @@ class Event < ActiveRecord::Base
   def self.build_connpass_event event_data
     self.new(
       title:       event_data.title,
-      url:         event_data.url,
+      url:         event_data.event_url,
       address:     event_data.address,
       description: event_data.description,
       start_time:  event_data.started_at,
