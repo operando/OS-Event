@@ -83,4 +83,12 @@ class Event < ActiveRecord::Base
       end_time:    event_data.event.ended_at,
       event_site:  'atnd')
   end
+
+  def self.sort_by_start_time_asc events
+    events.sort { |a, b| a.start_time <=> b.start_time }
+  end
+
+  def self.sort_by_start_time_desc events
+    events.sort { |a, b| b.start_time <=> a.start_time }
+  end
 end
