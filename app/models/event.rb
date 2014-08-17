@@ -85,10 +85,10 @@ class Event < ActiveRecord::Base
   end
 
   def self.sort_by_start_time_asc events
-    events.sort { |a, b| a.start_time <=> b.start_time }
+    events.sort_by { |event| event.start_time }
   end
 
   def self.sort_by_start_time_desc events
-    events.sort { |a, b| b.start_time <=> a.start_time }
+    events.sort_by { |event| event.start_time }.reverse
   end
 end
