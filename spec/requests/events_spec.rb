@@ -31,9 +31,9 @@ describe 'EventsController' do
       end
     end
 
-    describe 'GET /event' do
+    describe 'GET /events' do
       before do
-        get '/event', format: :json
+        get '/events', format: :json
       end
 
       let(:json) { JSON.parse(response.body) }
@@ -43,9 +43,9 @@ describe 'EventsController' do
       end
     end
 
-    describe 'GET /simple' do
+    describe 'GET /events/simple' do
       before do
-        get '/simple', format: :json
+        get '/events/simple', format: :json
       end
 
       let(:json) { JSON.parse(response.body) }
@@ -55,9 +55,9 @@ describe 'EventsController' do
       end
     end
 
-    describe 'GET /week' do
+    describe 'GET /events/week' do
       before do
-        get '/week', format: :json
+        get '/events/week', format: :json
       end
 
       let(:json) { JSON.parse(response.body) }
@@ -67,9 +67,9 @@ describe 'EventsController' do
       end
     end
 
-    describe 'GET /history' do
+    describe 'GET /events/history' do
       before do
-        get '/history', format: :json
+        get '/events/history', format: :json
       end
 
       let(:json) { JSON.parse(response.body) }

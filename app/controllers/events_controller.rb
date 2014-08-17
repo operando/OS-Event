@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  def event
+  def index
     @events = Event.select { |e| e.start_time > Time.now }
   end
 

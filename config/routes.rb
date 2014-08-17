@@ -1,16 +1,13 @@
 Rails.application.routes.draw do
 
-  root 'events#event', defaults: { format: "json" }
+  root 'events#index', defaults: { format: "json" }
 
-  match '/simple', to: 'events#simple', via: 'get', defaults: { format: "json" }
-
-  match '/event', to: 'events#event', via: 'get', defaults: { format: "json" }
-
-  match '/week', to: 'events#week', via: 'get', defaults: { format: "json" }
-
-  match '/today', to: 'events#today', via: 'get', defaults: { format: "json" }
-
-  match '/history', to: 'events#history', via: 'get', defaults: { format: "json" }
+  resources :events, only: [:index], defaults: { format: "json" } do
+    get :simple,  on: :collection
+    get :week,    on: :collection
+    get :today,   on: :collection
+    get :history, on: :collection
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
