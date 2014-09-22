@@ -2,15 +2,15 @@
 
 ## API
 
-* /event
+* /events
 
-* /simple
+* /events/simple
 
-* /week
+* /events/week
 
-* /today
+* /events/today
 
-* /history
+* /events/history
 
 ## Event Site
 
@@ -24,15 +24,17 @@
 
 * http://os-event.herokuapp.com
 
-* http://os-event.herokuapp.com/event
+* http://os-event.herokuapp.com/events
 
-* http://os-event.herokuapp.com/simple
+* http://os-event.herokuapp.com/events/event
 
-* http://os-event.herokuapp.com/week
+* http://os-event.herokuapp.com/events/simple
 
-* http://os-event.herokuapp.com/today
+* http://os-event.herokuapp.com/events/week
 
-* http://os-event.herokuapp.com/history
+* http://os-event.herokuapp.com/events/today
+
+* http://os-event.herokuapp.com/events/history
 
 ## TODO
 
